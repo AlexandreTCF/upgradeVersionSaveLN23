@@ -1,0 +1,10 @@
+{
+  "name": "changeSaveLn",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "fs-extra": "^8.0.1",
+    "ramda": "^0.26.1"
+  }
+}
