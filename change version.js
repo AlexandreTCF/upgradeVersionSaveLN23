@@ -5,15 +5,14 @@ const fs = require('fs-extra');
 const pathOld = `${os.homedir()}/.ln23_old`;
 const pathNew = `${os.homedir()}/.ln23`;
 
-console.log(`pathOld: ${pathOld}`);
-console.log(`pathNew: ${pathNew}`);
+fs.copySync(pathNew, pathOld);
 
-fs.copySync(pathOld, pathNew);
+console.log(`copy  ${pathNew} in ${pathOld}`);
+
 const writeJson = R.curry((path, data) => fs.writeJsonSync(path, data));
 
 const changeData = R.curry((path, filename) =>
   R.pipe(
-    R.tap(console.log),
     fs.readFileSync,
     R.toString,
     R.split('\n'),
@@ -25,7 +24,8 @@ const changeData = R.curry((path, filename) =>
 );
 
 R.pipe(
-  R.tap(console.log),
   fs.readdirSync,
   R.forEach(changeData(pathNew))
 )(pathNew);
+
+console.log('Upgrade finished');
